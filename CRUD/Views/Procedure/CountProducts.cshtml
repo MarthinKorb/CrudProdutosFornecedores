@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CRUD.Models.produto>
+
+
+@{
+    ViewBag.Title = "DropDown";
+}
+
+<h2>Ver Produtos por Fornecedor</h2>
+
+@using (Html.BeginForm("CountProducts", "procedure", FormMethod.Post))
+{
+    <div>
+        <div>
+            @Html.DropDownList("id", ViewBag.lista_forne as SelectList, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <br />
+        <hr />
+        <input class="btn btn-default" type="submit" value="Procurar" />
+        <br />
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

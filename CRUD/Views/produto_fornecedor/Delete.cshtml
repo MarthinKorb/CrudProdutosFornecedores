@@ -1,0 +1,41 @@
+﻿@model CRUD.Models.produto_fornecedor
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Deletar</h2>
+
+<h3>Você tem certeza que deseja deletar o produto desse Fornecedor?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fornecedor.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fornecedor.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produto.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produto.nome)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    <div class="form-actions no-color">
+        <p class="btn btn-default">@Html.ActionLink("Voltar", "Index")</p>
+
+        <input type="submit" value="Deletar" class="btn btn-danger" />
+    </div>
+    }
+</div>

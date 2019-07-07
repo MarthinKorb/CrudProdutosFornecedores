@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+    <EntitySetMapping Name="fornecedor">
+      <EntityTypeMapping TypeName="Database1Model.fornecedor">
+        <MappingFragment StoreEntitySet="fornecedor">
+          <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="cidade" ColumnName="cidade" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="produto">
+      <EntityTypeMapping TypeName="Database1Model.produto">
+        <MappingFragment StoreEntitySet="produto">
+          <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="produto_fornecedor">
+      <EntityTypeMapping TypeName="Database1Model.produto_fornecedor">
+        <MappingFragment StoreEntitySet="produto_fornecedor">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+          <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="InserirProdutoFornecedor" FunctionName="Database1Model.Store.InserirProdutoFornecedor" />
+    <FunctionImportMapping FunctionImportName="produto_SearchProducts" FunctionName="Database1Model.Store.produto_SearchProducts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Database1Model.produto_SearchProducts_Result">
+          <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spSearchProducts" FunctionName="Database1Model.Store.produto_SearchProducts" />
+    <FunctionImportMapping FunctionImportName="produto_updateProduto" FunctionName="Database1Model.Store.produto_updateProduto" />
+    <FunctionImportMapping FunctionImportName="spUpdateProduto" FunctionName="Database1Model.Store.produto_updateProduto" />
+    <FunctionImportMapping FunctionImportName="Produto_CountProducts" FunctionName="Database1Model.Store.Produto_CountProducts" />
+  </EntityContainerMapping>
+</Mapping>

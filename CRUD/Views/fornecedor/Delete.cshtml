@@ -1,0 +1,40 @@
+﻿@model CRUD.Models.fornecedor
+
+@{
+    ViewBag.Title = "Deletar Fornecedor";
+}
+
+<h2>Deletar</h2>
+
+<h3>Tem certeza que deseja excluir o fornecedor?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cidade)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <p class="btn btn-default">@Html.ActionLink("Voltar", "Index")</p>
+        <input type="submit" value="Excluir" class="btn btn-danger" />
+
+    </div>
+    }
+</div>

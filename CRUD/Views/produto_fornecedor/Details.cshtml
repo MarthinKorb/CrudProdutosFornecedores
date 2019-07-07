@@ -1,0 +1,36 @@
+﻿@model CRUD.Models.produto_fornecedor
+
+@{
+    ViewBag.Title = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fornecedor.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fornecedor.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produto.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produto.nome)
+        </dd>
+
+    </dl>
+</div>
+<p class="btn btn-default">
+    @Html.ActionLink("Voltar", "Index")
+</p>
+<p class="btn btn-default">
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id })
+</p>

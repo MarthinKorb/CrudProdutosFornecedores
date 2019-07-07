@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="fornecedor">
+          <Key>
+            <PropertyRef Name="id_fornecedor" />
+          </Key>
+          <Property Name="id_fornecedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cidade" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="produto">
+          <Key>
+            <PropertyRef Name="id_produto" />
+          </Key>
+          <Property Name="id_produto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="valor" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="produto_fornecedor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_produto" Type="int" Nullable="false" />
+          <Property Name="id_fornecedor" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__produto_f__id_fo__2A4B4B5E">
+          <End Role="fornecedor" Type="Self.fornecedor" Multiplicity="1" />
+          <End Role="produto_fornecedor" Type="Self.produto_fornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedor">
+              <PropertyRef Name="id_fornecedor" />
+            </Principal>
+            <Dependent Role="produto_fornecedor">
+              <PropertyRef Name="id_fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__produto_f__id_pr__29572725">
+          <End Role="produto" Type="Self.produto" Multiplicity="1" />
+          <End Role="produto_fornecedor" Type="Self.produto_fornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produto">
+              <PropertyRef Name="id_produto" />
+            </Principal>
+            <Dependent Role="produto_fornecedor">
+              <PropertyRef Name="id_produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="InserirProdutoFornecedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_produto" Type="int" Mode="In" />
+          <Parameter Name="id_fornecedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Produto_CountProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_fornecedor" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id_prod" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="produto_SearchProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="produto_updateProduto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_produto" Type="int" Mode="In" />
+          <Parameter Name="productName" Type="varchar" Mode="In" />
+          <Parameter Name="valor" Type="decimal" Mode="In" />
+        </Function>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="fornecedor" EntityType="Self.fornecedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="produto" EntityType="Self.produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="produto_fornecedor" EntityType="Self.produto_fornecedor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__produto_f__id_fo__2A4B4B5E" Association="Self.FK__produto_f__id_fo__2A4B4B5E">
+            <End Role="fornecedor" EntitySet="fornecedor" />
+            <End Role="produto_fornecedor" EntitySet="produto_fornecedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__produto_f__id_pr__29572725" Association="Self.FK__produto_f__id_pr__29572725">
+            <End Role="produto" EntitySet="produto" />
+            <End Role="produto_fornecedor" EntitySet="produto_fornecedor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="fornecedor">
+          <Key>
+            <PropertyRef Name="id_fornecedor" />
+          </Key>
+          <Property Name="id_fornecedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="produto_fornecedor" Relationship="Self.FK__produto_f__id_fo__2A4B4B5E" FromRole="fornecedor" ToRole="produto_fornecedor" />
+        </EntityType>
+        <EntityType Name="produto">
+          <Key>
+            <PropertyRef Name="id_produto" />
+          </Key>
+          <Property Name="id_produto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <NavigationProperty Name="produto_fornecedor" Relationship="Self.FK__produto_f__id_pr__29572725" FromRole="produto" ToRole="produto_fornecedor" />
+        </EntityType>
+        <EntityType Name="produto_fornecedor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_produto" Type="Int32" Nullable="false" />
+          <Property Name="id_fornecedor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="fornecedor" Relationship="Self.FK__produto_f__id_fo__2A4B4B5E" FromRole="produto_fornecedor" ToRole="fornecedor" />
+          <NavigationProperty Name="produto" Relationship="Self.FK__produto_f__id_pr__29572725" FromRole="produto_fornecedor" ToRole="produto" />
+        </EntityType>
+        <Association Name="FK__produto_f__id_fo__2A4B4B5E">
+          <End Role="fornecedor" Type="Self.fornecedor" Multiplicity="1" />
+          <End Role="produto_fornecedor" Type="Self.produto_fornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedor">
+              <PropertyRef Name="id_fornecedor" />
+            </Principal>
+            <Dependent Role="produto_fornecedor">
+              <PropertyRef Name="id_fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__produto_f__id_pr__29572725">
+          <End Role="produto" Type="Self.produto" Multiplicity="1" />
+          <End Role="produto_fornecedor" Type="Self.produto_fornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produto">
+              <PropertyRef Name="id_produto" />
+            </Principal>
+            <Dependent Role="produto_fornecedor">
+              <PropertyRef Name="id_produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="fornecedor" EntityType="Self.fornecedor" />
+          <EntitySet Name="produto" EntityType="Self.produto" />
+          <EntitySet Name="produto_fornecedor" EntityType="Self.produto_fornecedor" />
+          <AssociationSet Name="FK__produto_f__id_fo__2A4B4B5E" Association="Self.FK__produto_f__id_fo__2A4B4B5E">
+            <End Role="fornecedor" EntitySet="fornecedor" />
+            <End Role="produto_fornecedor" EntitySet="produto_fornecedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__produto_f__id_pr__29572725" Association="Self.FK__produto_f__id_pr__29572725">
+            <End Role="produto" EntitySet="produto" />
+            <End Role="produto_fornecedor" EntitySet="produto_fornecedor" />
+          </AssociationSet>
+          <FunctionImport Name="InserirProdutoFornecedor">
+            <Parameter Name="id_produto" Mode="In" Type="Int32" />
+            <Parameter Name="id_fornecedor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="produto_SearchProducts" ReturnType="Collection(Database1Model.produto_SearchProducts_Result)">
+          <Parameter Name="productName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spSearchProducts" EntitySet="produto" ReturnType="Collection(Database1Model.produto)">
+          <Parameter Name="productName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="produto_updateProduto">
+            <Parameter Name="id_produto" Mode="In" Type="Int32" />
+            <Parameter Name="productName" Mode="In" Type="String" />
+            <Parameter Name="valor" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdateProduto" EntitySet="produto" ReturnType="Collection(Database1Model.produto)">
+            <Parameter Name="id_produto" Mode="In" Type="Int32" />
+            <Parameter Name="productName" Mode="In" Type="String" />
+            <Parameter Name="valor" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="Produto_CountProducts" IsComposable="true" ReturnType="Collection(Int32)">
+          <Parameter Name="id_fornecedor" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="produto_SearchProducts_Result">
+          <Property Type="Int32" Name="id_produto" Nullable="false" />
+          <Property Type="String" Name="nome" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="valor" Nullable="false" Precision="12" Scale="2" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+          <EntitySetMapping Name="fornecedor">
+            <EntityTypeMapping TypeName="Database1Model.fornecedor">
+              <MappingFragment StoreEntitySet="fornecedor">
+                <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="produto">
+            <EntityTypeMapping TypeName="Database1Model.produto">
+              <MappingFragment StoreEntitySet="produto">
+                <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="produto_fornecedor">
+            <EntityTypeMapping TypeName="Database1Model.produto_fornecedor">
+              <MappingFragment StoreEntitySet="produto_fornecedor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+                <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InserirProdutoFornecedor" FunctionName="Database1Model.Store.InserirProdutoFornecedor" />
+          <FunctionImportMapping FunctionImportName="produto_SearchProducts" FunctionName="Database1Model.Store.produto_SearchProducts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Database1Model.produto_SearchProducts_Result">
+                <ScalarProperty Name="id_produto" ColumnName="id_produto" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSearchProducts" FunctionName="Database1Model.Store.produto_SearchProducts" />
+          <FunctionImportMapping FunctionImportName="produto_updateProduto" FunctionName="Database1Model.Store.produto_updateProduto" />
+          <FunctionImportMapping FunctionImportName="spUpdateProduto" FunctionName="Database1Model.Store.produto_updateProduto" />
+          <FunctionImportMapping FunctionImportName="Produto_CountProducts" FunctionName="Database1Model.Store.Produto_CountProducts" />
+          
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CRUD.Models.produto>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<title>Lista de Produto</title>
+
+@using (Html.BeginForm("Index", "Procedure", FormMethod.Post))
+{
+    <span>Buscar Produto</span> @Html.TextBox("productName") 
+<input class="btn btn-primary" type="submit" value="Buscar" />
+<br />
+<br />
+<table class="table table-hover table-striped">
+    <tr>
+        <th>Cód Produto</th>
+        <th>Nome</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor)
+            </td>
+            <td>
+                <p class="btn btn-default">@Html.ActionLink("Editar", "Edit", new { id = item.id_produto })</p>
+            </td>
+        </tr>
+    }
+</table>
+}
+
+<p class="btn btn-default">@Html.ActionLink("fct_CountProducts", "CountProducts")</p>
+<p class="btn btn-default">@Html.ActionLink("Voltar para Home", "Index", "Home")</p>
+<p class="btn btn-default">@Html.ActionLink("Voltar", "Index")</p>

@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron jumbotron-fluid" >
+    <h1>Trabalho de CSharp</h1>
+    <p class="lead">Um site de cadastro de produtos e fornecedores</p>
+
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Ir para Cadastro de Produtos</h4>
+        <p><a class="btn btn-success col-md-6" @Html.ActionLink("Produtos", "Index", "Produto")</a></p>
+    </div>
+
+    <div class="col-md-6">
+        <h3>Testa a Procedure</h3>
+        <p><a class="btn btn-success col-md-6"  @Html.ActionLink("Procedure", "Index", "Procedure")</a></p>
+    </div>
+
+    <div class="col-md-6">
+        <h4>Ir para Cadastro de Fornecedores</h4>
+        <p><a class="btn btn-success col-md-6" @Html.ActionLink("Fornecedores", "Index", "fornecedor")</a></p>
+    </div>
+
+</div>
